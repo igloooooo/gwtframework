@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.iglooit</groupId>
+    <artifactId>iglooit-bss-parent</artifactId>
+    <name>Iglooit BSS Aggregating Module</name>
+    <version>trunk-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>iglooit-top-level</artifactId>
+        <groupId>com.iglooit</groupId>
+        <version>trunk-SNAPSHOT</version>
+    </parent>
+
+    <!--  convenience to define GWT version in one place. -->
+    <properties>
+        <gwtVersion>2.3.0</gwtVersion>
+        <gwt.js.style>PRETTY</gwt.js.style>
+        <!-- PRETTY, OBF, DETAILED -->
+        <jaxwsVersion>2.1.1</jaxwsVersion>
+        <jaxbVersion>2.1.4</jaxbVersion>
+        <!-- NB: do not use cxf 2.5.2 - it has a bug - it cannot install our WSDLS. -->
+        <cxf.version>2.2.11</cxf.version>
+        <checkstyles.version>2.6</checkstyles.version>
+
+        <!-- code coverage tool settings -->
+        <!--<coverage.cobertura.version>2.5.1</coverage.cobertura.version>-->
+
+        <!-- Surefire settings -->
+        <test.jvmArgs>-Xms512m -Xmx2048m -XX:MaxPermSize=512m -XX:-UseSplitVerifier -XX:-UseGCOverheadLimit</test.jvmArgs>
+        <test.failureIgnored>false</test.failureIgnored>
+
+        <!-- enable/disable whether code coverage process should stop Maven from continuing -->
+        <coverage.haltOnFailure>false</coverage.haltOnFailure>
+
+        <!-- default total coverage rates (applicable for all modules using coverage tools) -->
+        <coverage.branchRate>85</coverage.branchRate>
+        <coverage.lineRate>85</coverage.lineRate>
+
+        <!-- enable/disable performance assertion for tests -->
+        <testperf.skip>true</testperf.skip>
+
+        <!-- default maximum execution time for a test method -->
+        <testperf.simple.max>100</testperf.simple.max>
+        <testperf.integration.max>1000</testperf.integration.max>
+    </properties>
+
+    <!-- we define our repo here, so that if the parent is not checked out,
+         it can find it on archiva -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.png</include>
+                    <include>**/*.gif</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/generated/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${findbugs.plugin.version}</version>
+                    <configuration>
+                        <skip>false</skip>
+                        <threshold>Medium</threshold>
+                        <failOnError>${halt.on.findbugs}</failOnError>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12</version>
+                    <configuration>
+
+                        <!-- Special system properties for test performance monitoring function -->
+                        <systemPropertyVariables>
+                            <testPerfAssertionSkipped>${testperf.skip}</testPerfAssertionSkipped>
+                            <simpleTestMaxExecTime>${testperf.simple.max}</simpleTestMaxExecTime>
+                            <intTestMaxExecTime>${testperf.integration.max}</intTestMaxExecTime>
+                        </systemPropertyVariables>
+
+                        <!--
+                            Memory configuration for Surefire's test JVMs. This setting is
+                            different from the one for Maven.
+
+                            The idea is that we should allow enough PermGen space for class loading
+                            activities which are required by various tests
+                        -->
+                        <argLine>${test.jvmArgs}</argLine>
+                        <testFailureIgnore>${test.failureIgnored}</testFailureIgnore>
+                    </configuration>
+
+                    <!--
+                        This dependency is required to run JUnit-based test cases which use junit extensions
+                        (e.g. @Category)
+                    -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit47</artifactId>
+                            <version>2.12</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <!-- Code coverage tool -->
+                <!--
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>${coverage.cobertura.version}</version>
+
+                    <configuration>
+                        --><!-- never cover test classes --><!--
+                        <instrumentation>
+                            <excludes>
+                                <exclude>com/clarity/**/*Test.class</exclude>
+                            </excludes>
+                        </instrumentation>
+
+                        --><!-- code coverage thresholds for active (executing) module --><!--
+                        <check>
+                            <totalBranchRate>${coverage.branchRate}</totalBranchRate>
+                            <totalLineRate>${coverage.lineRate}</totalLineRate>
+                            <haltOnFailure>${coverage.haltOnFailure}</haltOnFailure>
+                        </check>
+                    </configuration>
+
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>clean</goal>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                -->
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <threshold>Medium</threshold>
+                </configuration>
+            </plugin>
+
+            <!-- This plugin is used for checkstyles, findbugs, and the assembly plugin for all the modules -->
+            <!-- When a new branch is created, comment this plugin and run mvn deploy on build-conf dir -->
+            <!-- Uncomment when the build-conf jar file has been deployed    -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                            <groupId>com.clarity</groupId>
+                            <artifactId>clarity-webapp-build-conf</artifactId>
+                            <version>${pom.version}</version>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>unpack-iglooit-build-conf</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                                    <groupId>com.iglooit</groupId>
+                                    <artifactId>iglooit-webapp-build-conf</artifactId>
+                                    <version>${pom.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- google mvn processor -->
+            <!-- Run annotation processors on src/main/java sources -->
+            <plugin>
+                <groupId>org.bsc.maven</groupId>
+                <artifactId>maven-processor-plugin</artifactId>
+                <version>2.2.3</version>
+                <executions>
+                    <execution>
+                        <id>process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <!-- do not run until after compilation success. -->
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- source output directory -->
+                    <outputDirectory>src/main/generated/java</outputDirectory>
+                    <processors>
+                        <processor>com.clarity.core.metageneration.server.apt.GenerateMetasAnnotationProcessor</processor>
+                    </processors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>add-generated-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>
+                                    ${basedir}/src/main/generated/java/
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.sonar</groupId>-->
+            <!--<artifactId>sonar-maven-plugin</artifactId>-->
+            <!--<version>2.6</version>-->
+            <!--</plugin>-->
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyles.version}</version>
+                <configuration>
+                    <configLocation>${project.build.directory}/build-conf/checkstyle/clarity_checks.xml
+                    </configLocation>
+                    <suppressionsLocation>${project.build.directory}/build-conf/checkstyle/suppressions.xml
+                    </suppressionsLocation>
+                    <includes>**/*.java</includes>
+                    <propertyExpansion>cacheFile=${project.build.directory}/checkstyle-cachefile</propertyExpansion>
+                    <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                    <skipExec>false</skipExec>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jxr-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.7.2</version>
+            </plugin>
+
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${coverage.cobertura.version}</version>
+            </plugin>
+            -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.1.2</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <excludeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.exclude.xml
+                    </excludeFilterFile>
+                    <includeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.include.xml
+                    </includeFilterFile>
+                    <threshold>Medium</threshold>
+                    <failOnError>${halt.on.findbugs}</failOnError>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-pmd-plugin</artifactId>-->
+            <!--<version>2.3</version>-->
+            <!--<configuration>-->
+            <!--<targetJdk>${compileSource}</targetJdk>-->
+            <!--<rulesets>-->
+            <!--<ruleset>/rulesets/basic.xml</ruleset>-->
+            <!--<ruleset>/rulesets/logging-jakarta-commons.xml</ruleset>-->
+            <!--<ruleset>/rulesets/logging-java.xml</ruleset>-->
+            <!--<ruleset>/rulesets/codesize.xml</ruleset>-->
+            <!--<ruleset>/rulesets/strings.xml</ruleset>-->
+            <!--</rulesets>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+            <!--<groupId>org.codehaus.mojo</groupId>-->
+            <!--<artifactId>jdepend-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>gwt-dev-windows</id>
+            <properties>
+                <platform>windows</platform>
+                <separator>\\</separator>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+        </profile>
+        <profile>
+            <id>gwt-dev-mac</id>
+            <properties>
+                <platform>mac</platform>
+                <separator>/</separator>
+            </properties>
+
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+        </profile>
+        <profile>
+            <id>gwt-dev-linux</id>
+            <properties>
+                <platform>linux</platform>
+                <separator>/</separator>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <os>
+                    <name>linux</name>
+                </os>
+            </activation>
+        </profile>
+    </profiles>
+
+    <modules>
+        <module>build-conf</module>
+        <module>core</module>
+
+        <!-- DO NOT ADD ***ANYTHING*** that goes into core-war after this line, otherwise it will use the last version -->
+        <module>core-war</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.databene</groupId>
+            <artifactId>contiperf</artifactId>
+            <version>2.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--
+            gwt-test-utils is a Java testing framework for GWT applications. It provides a simple way to test your
+            GWT User Interfaces without GWTTestCase or any servlet container instance.
+            NOTE: All extensions of the gwt-test-utils must have the same version as the main jar!
+            -->
+            <dependency>
+                <groupId>com.googlecode.gwt-test-utils</groupId>
+                <artifactId>gwt-test-utils</artifactId>
+                <version>0.33.3</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.gwt-test-utils</groupId>
+                <artifactId>gwt-test-utils-gxt</artifactId>
+                <version>0.33.3</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

@@ -1,0 +1,27 @@
+<module rename-to="Commons">
+
+    <!-- Inherit the core Web Toolkit stuff.                  -->
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.http.HTTP"/>
+    <inherits name='com.extjs.gxt.ui.GXT'/>
+
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
+
+    <!--openlayers-->
+    <!-- Allowed localizations -->
+    <extend-property name="locale" values="en"/>
+    <extend-property name="locale" values="bg"/>
+    <extend-property name="locale" values="vi"/> <!-- Vietnamese -->
+
+    <!-- begin:speedup build -->
+    <!--<set-property name="user.agent" value="gecko1_8" />-->
+    <!--<set-property name="user.agent" value="safari" />-->
+    <!--<set-property name="user.agent" value="ie6" />-->
+    <!-- end:speedup build -->
+
+    <!-- source paths (to split out the cyclic deps) -->
+    <source path="iface"/>
+
+</module>

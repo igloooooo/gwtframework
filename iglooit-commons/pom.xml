@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>iglooit-top-level</artifactId>
+        <groupId>com.iglooit</groupId>
+        <version>trunk-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+    <artifactId>iglooit-commons</artifactId>
+    <name>Iglooit Commons</name>
+    <version>${parent.version}</version>
+    <packaging>jar</packaging>
+
+    <developers>
+        <developer>
+            <name>Nicholas Zhu</name>
+            <email>nichols.zu@gmail.com</email>
+            <organization>Iglooit</organization>
+            <roles>
+                <role>
+                    Developer
+                </role>
+            </roles>
+        </developer>
+    </developers>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.0.jboss</version>
+        </dependency>
+
+        <!-- Jasypt Crypto API -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>1.6</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.9-RC0</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <finalName>iglooit-commons</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${findbugs.plugin.version}</version>
+                    <configuration>
+                        <skip>false</skip>
+                        <threshold>Medium</threshold>
+                        <failOnError>${halt.on.findbugs}</failOnError>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <threshold>Medium</threshold>
+                    <failOnError>${halt.on.findbugs}</failOnError>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+
+                <configuration>
+                    <target>${compileSource}</target>
+                    <source>${compileSource}</source>
+                    <excludes>
+                        <exclude>**/jre/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Use to build both main and test jars -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                            <groupId>com.iglooit</groupId>
+                            <artifactId>iglooit-tools-build-conf</artifactId>
+                            <version>${pom.version}</version>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>unpack-iglooit-tools-build-conf</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                                    <groupId>com.iglooit</groupId>
+                                    <artifactId>iglooit-tools-build-conf</artifactId>
+                                    <version>${pom.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyles.version}</version>
+                <configuration>
+                    <configLocation>${project.build.directory}/build-conf/checkstyle/clarity_checks.xml</configLocation>
+                    <suppressionsLocation>${project.build.directory}/build-conf/checkstyle/suppressions.xml</suppressionsLocation>
+                    <includes>**/*.java</includes>
+                    <propertyExpansion>cacheFile=${project.build.directory}/checkstyle-cachefile</propertyExpansion>
+                    <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                    <skipExec>false</skipExec>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <excludeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.exclude.xml
+                    </excludeFilterFile>
+                    <includeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.include.xml
+                    </includeFilterFile>
+                    <threshold>Medium</threshold>
+                    <failOnError>${halt.on.findbugs}</failOnError>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>

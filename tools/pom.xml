@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.clarity</groupId>
+    <artifactId>tools</artifactId>
+    <name>Clarity Thin Client Tools</name>
+    <description>External Tools for the thin client and manipulation of it's data</description>
+    <packaging>pom</packaging>
+    <version>trunk-SNAPSHOT</version>
+
+    <modules>
+        <module>build-conf</module>
+        <module>performanceImportExport</module>
+    </modules>
+
+    <parent>
+        <artifactId>clarity-top-level</artifactId>
+        <groupId>com.clarity</groupId>
+        <version>trunk-SNAPSHOT</version>
+    </parent>
+    <repositories>
+         <repository>
+             <id>snapshots.int.archiva1.clarity.com</id>
+             <url>http://int-archiva1.clarity.com:8081/archiva/repository/snapshots/</url>
+         </repository>
+     </repositories>
+    <build>
+       <plugins>
+
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <version>2.3</version>
+               <configuration>
+                   <artifactItems>
+                       <artifactItem>
+                           <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                           <groupId>com.clarity</groupId>
+                           <artifactId>clarity-tools-build-conf</artifactId>
+                           <version>${pom.version}</version>
+                       </artifactItem>
+                   </artifactItems>
+               </configuration>
+               <executions>
+                   <execution>
+                       <id>unpack-clarity-tools-build-conf</id>
+                       <phase>generate-resources</phase>
+                       <goals>
+                           <goal>unpack</goal>
+                       </goals>
+                       <configuration>
+                           <artifactItems>
+                               <artifactItem>
+                                   <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
+                                   <groupId>com.clarity</groupId>
+                                   <artifactId>clarity-tools-build-conf</artifactId>
+                                   <version>${pom.version}</version>
+                               </artifactItem>
+                           </artifactItems>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-checkstyle-plugin</artifactId>
+               <version>${checkstyles.version}</version>
+               <configuration>
+                   <configLocation>${project.build.directory}/build-conf/checkstyle/clarity_checks.xml</configLocation>
+                   <suppressionsLocation>${project.build.directory}/build-conf/checkstyle/suppressions.xml</suppressionsLocation>
+                   <includes>**/*.java</includes>
+                   <propertyExpansion>cacheFile=${project.build.directory}/checkstyle-cachefile</propertyExpansion>
+                   <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                   <!-- will fail because the build-conf directory is not extracted -->
+                       <!--<skipExec>true</skipExec>-->
+               </configuration>
+
+           </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <excludeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.exclude.xml
+                    </excludeFilterFile>
+                    <includeFilterFile>${project.build.directory}/build-conf/findbugs/findbugs.include.xml
+                    </includeFilterFile>
+                    <!-- will fail because the build-conf directory is not extracted -->
+                    <skip>true</skip>
+                    <failOnError>${halt.on.findbugs}</failOnError>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>

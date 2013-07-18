@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+
+    <suppress checks="."
+              files="Ajax.java"/>
+
+    <suppress checks="."
+              files="AlarmServiceImpl.java"/>
+
+    <suppress checks="."
+              files="AuthenticationPrivilege.java"/>
+
+    <suppress checks="."
+              files="FSMPropertyNames.java"/>
+
+    <suppress checks="."
+              files="KeyValuePair.java"/>
+
+    <suppress checks="."
+              files="MetaCache.java"/>
+
+    <suppress checks="."
+              files="MetaDelegateFactory.java"/>
+
+    <suppress checks="."
+              files="report[\\/]src[\\/]main[\\/]java[\\/]com[\\/].*"/>
+
+    <suppress checks="."
+              files="RootExportTreeMap.java"/>
+
+    <suppress checks="."
+              files="ThreeStrings.java"/>
+
+    <suppress checks="."
+              files="TwoStrings.java"/>
+
+    <suppress checks="."
+              files="InboxConstantsWithLookup.java"/>
+
+    <suppress checks="."
+              files="InboxCommonConstantsLookup.java"/>
+
+    <suppress checks="."
+              files="TMCConstantsWithLookup.java"/>
+
+    <suppress checks="."
+              files="FMConstantsWithLookup.java"/>
+
+    <!--
+      Turn off all checks for Generated and Test code. Fixes issues with using
+      Eclipse plug-in.
+      -->
+    <suppress checks="." files=".*[\\/]grammars[\\/]Generated[a-zA-Z]*\.java"/>
+    <suppress checks="." files=".*[\\/]grammars[\\/]Generated[a-zA-Z]*\.java"/>
+    <suppress checks="." files=".*[\\/]checkstyle[\\/]gui[\\/]"/>
+
+    <!-- Ignore mx graph demo -->
+    <suppress checks="." files=".*[\\/]mxgraph[\\/]demo[\\/].*\.java"/>
+
+    <!-- Turn off checks for webservice generated code -->
+    <suppress checks="." files=".*[\\/]visualiser[\\/]server[\\/]circuit[\\/]service[\\/]proxy[\\/].*\.java"/>
+    <suppress checks="." files=".*[\\/]visualiser[\\/]server[\\/]service[\\/]proxy[\\/].*\.java"/>
+
+    <!-- Ignore generated classes in config -->
+    <suppress checks="." files=".*[\\/]config[\\/]server[\\/]domain[\\/]complextype[\\/].*\.java"/>
+
+    <!-- Ignore generated Java files -->
+    <suppress checks="." files=".*[\\/]generated[\\/]java[\\/].*\.java"/>
+
+    <suppress checks="MethodLengthCheck"
+              files="ViperTriplePlaySeeder.java"
+        />
+
+    <suppress checks="LineLength"
+              files="IndexedDBApi.java|WebWidgetPresenter.java|com.clarity.alarms.alarms.client.controller.Presenter.java|com.clarity.core.base.client.view.mxgraph.GraphEditor.java|com.clarity.visualisation.visualiser.client.view.shapes.EquipmentShape|com.clarity.visualisation.visualiser.client.view.shapes.ServiceShape|com.clarity.visualisation.visualiser.client.view.shapes.AddressShape|com.clarity.core.base.client.view.highcharts.ChartConfig.java|com.clarity.core.base.client.view.highcharts.config.ChartLegendOptions.java"
+        />
+
+    <!-- gwt needs runtime exceptions to be thrown explicitly, to know to
+        recreate them in the client as an equivalent exception -->
+    <suppress checks="RedundantThrowsCheck"
+              files=".*[\\/]iface[\\/][a-zA-Z]*Service\.java"/>
+    <suppress checks="RedundantThrowsCheck"
+              files=".*[\\/]iface[\\/][a-zA-Z]*ServiceAsync\.java"/>
+    <suppress checks="RedundantThrowsCheck"
+              files=".*[\\/]iface[\\/].*[\\/]service[\\/][a-zA-Z]*Service\.java"/>
+    <suppress checks="RedundantThrowsCheck"
+              files=".*[\\/]iface[\\/].*[\\/]service[\\/][a-zA-Z]*ServiceAsync\.java"/>
+
+    <!-- suppress checks for println in these-->
+    <suppress checks="RegexpCheck" files="AlarmServiceTester.java"/>
+    <suppress checks="RegexpCheck" files="AlarmTester.java"/>
+    <suppress checks="RegexpCheck" files="GraphViewer.java"/>
+    <suppress checks="RegexpCheck" files="TreeViewer.java"/>
+    <suppress checks="RegexpCheck" files="TreeViewer2.java"/>
+    <suppress checks="RegexpCheck" files="GenerateUUIDs.java"/>
+
+    <suppress checks="ParameterNumberCheck" files="Graph.java"/>
+    <suppress checks="ParameterNumberCheck" files="FsmOperationalReportInput.java"/>
+    <suppress checks="ParameterNumberCheck" files="FsmJobTicketHome2.java"/>
+    <suppress checks="ParameterNumberCheck" files="FsmEmployeeHome.java"/>
+
+    <suppress checks="ParameterNumberCheck" files="FilterField.java"/>
+
+    <suppress checks="ParameterNumberCheck" files="AggregateLocationPopupPresenter.java"/>
+
+    <suppress checks="MethodLengthCheck"
+              files="DevSeeder.java"
+        />
+
+    <suppress checks="MethodNameCheck"
+              files="com.clarity.fsmcommon.fsmcommon.iface.i18n.FSMNotificationTypeConstants.java"
+        />
+
+    <suppress checks="LineLengthCheck"
+              files="CoreSeeder.java"
+        />
+    <suppress checks="LineLengthCheck"
+              files="GraphEditor.java"
+        />
+
+    <suppress checks="LineLengthCheck"
+                  files="GWTCommsEntryPoint.java"
+        />
+
+    <suppress checks="LineLengthCheck"
+                  files="UniversalCommsService.java"
+        />
+
+    <suppress checks="LineLengthCheck"
+              files="com.clarity.fsm.fsm.iface.domain.reports.operational.FsmOperationalReportRule.java"
+        />
+
+    <suppress checks="MethodLengthCheck"
+              files="CoreSeeder.java|com.clarity.fsm.fsm.server.FsmMetaConversionQuirks.java"
+        />
+    <suppress checks="MethodLengthCheck"
+              files="FsmJobTicketDetail.java|FsmScheduler.java"
+        />
+
+    <suppress checks="MethodLengthCheck"
+              files="Faults.java"
+        />
+
+    <suppress checks="MethodLengthCheck"
+              files="InboxProviderGroupPresenter.java"
+        />
+
+    <suppress checks="MethodLengthCheck"
+              files="ProdDefExporter.java"
+        />
+
+    <suppress checks="Regexp"
+              files="GenerateMetasAnnotationProcessor.java"/>
+
+    <suppress checks="Regexp"
+              files="com.clarity.maven.plugins.StripWarSourcePlugin.java"/>
+
+    <!-- For constructors in genuine DTOs -->
+    <suppress checks="ParameterNumber"
+              files="com.clarity.fsmcommon.fsmcommon.iface.domain.JobTicket.FsmJobTicketHistorySearchFilter.java"/>
+
+    <suppress checks="com.clarity.checkstyle.checks.CentralPlaceForDateConstruction"
+              files="TimeUtil.java|ServerTimeUtil.java|DateCache.java|.*Test.java|.*Tst.java|GWTCacheControlFilter.java"/>
+
+    <suppress checks="ParameterAssignment"
+              files="RetainAnchorFilter.java" />
+
+    <suppress checks="IllegalImport"
+              files="BonitaLoginModule.java" />
+
+    <suppress checks="RegexpCheck"
+              files="com.clarity.plugincore.process.Receiver" />
+
+    <suppress checks="LineLengthCheck"
+              files="com.clarity.performancecommon.client.view.detail.component.SelfMonitorSemiDetailChartDisplay.java"/>
+
+    <suppress checks="com.clarity.checkstyle.checks.ClarityInvalidMethodNameCheck"
+        files="ExportImportUtility.java|Error.jsp|DbUtil.java" />
+
+    <suppress checks="DoubleCheckedLockingCheck" files="AbstractAlarmDataAggregator.java"/>
+
+    <suppress checks="RegexpCheck" files="LoadReportConnect.java"/>
+
+    <suppress checks="ParameterNumberCheck" files="PerfDWHActiveBreachDTO.java" />
+
+    <suppress checks="LineLengthCheck"
+                  files="com.clarity.core.base.client.view.highcharts.Chart.java"/>
+
+    <suppress checks="LineLengthCheck"
+              files="com.clarity.performancecommon.client.view.detail.component.SelfMonitorSemiDetailChart.java"/>
+
+    <suppress checks="LineLengthCheck"
+              files="com.clarity.performancecommon.client.view.chart.PerfTimeXAxisChartWrapper.java"/>
+
+    <suppress checks="LineLengthCheck"
+              files="com.clarity.core.base.client.view.highcharts.helper.HighChartUtil.java"/>
+
+     <suppress checks="ParameterNumberCheck"
+              files="com.clarity.performancecommon.client.command.PerformanceCommonCommands.java"/>
+
+    <suppress checks="ParameterNumberCheck" files="ACECorrelationRule.java"/>
+
+    <suppress checks="com.clarity.checkstyle.checks.GwtSupportedJavaClassesCheck"
+              files="com.clarity.core.oss.iface.domain.Attribute" />
+
+    <suppress checks="LineLength"
+              files="IndexedDBApi.java|WebWidgetPresenter.java|com.clarity.alarms.alarms.client.controller.Presenter.java|com.clarity.core.base.client.view.mxgraph.GraphEditor.java|com.clarity.visualisation.visualiser.client.view.shapes.EquipmentShape|com.clarity.visualisation.visualiser.client.view.shapes.AddressShape|com.clarity.core.base.client.view.highcharts.ChartConfig.java|com.clarity.core.base.client.view.highcharts.config.ChartLegendOptions.java|com.clarity.core.base.client.comms.GWTCommsEntryPoint.java"
+        />
+
+    <suppress checks="ParameterAssignment" files="RetainAnchorFilter.java" />
+
+    <suppress checks="IllegalImport"
+                  files="BonitaLoginModule.java" />
+
+    <suppress checks="com.clarity.checkstyle.checks.CentralPlaceForDateConstruction"
+           files="TimeUtil.java|ServerTimeUtil.java|DateCache.java|.*Test.java|.*Tst.java|GWTCacheControlFilter.java"/>
+
+    <!--<suppress checks="com.clarity.checkstyle.checks.ClarityInvalidMethodNameCheck"-->
+              <!--files="ExportImportUtility.java|OSSHome.java|Error.jsp|DbUtil.java" />-->
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.alarms.alarm.server.handler.AlarmExternalURLListFetchRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.alarms.alarm.server.handler.config.AbstractConfigManagerRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.alarms.alarmobjectsummary.server.command.RelatedAlarmListRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.performancecommon.server.commands.ROGChildObjectFetchForNodeRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.performancecommon.server.commands.DataReporterRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.performancecommon.server.commands.PerfThresholdSaveRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.performancecommon.server.commands.DataManagerRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.faultmanager.server.command.RelatedFaultListRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.plannedevent.plannedeventobjectsummary.server.command.RelatedPlannedEventListRequestHandler" />
+
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="com.clarity.visualisation.connectivityobjectsummary.server.command.RelatedConnectivityListRequestHandler" />
+
+    <!-- the following are suppressed checks that are violated that should be fixed to get build working -->
+    <suppress checks="com.clarity.checkstyle.checks.RequestHandlersMustBeThreadSafe"
+              files="GetReportTemplatesRequestHandler.java|CheckCreateFaultPrivilegeRequestHandler.java" />
+
+    <suppress checks="LineLengthCheck"
+                      files="com.clarity.core.base.client.view.highcharts.helper.HighChartUtil.java"/>
+
+</suppressions>
+

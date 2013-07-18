@@ -1,0 +1,680 @@
+<FindBugsFilter>
+
+    <!--
+    Inner classes dont have to be declared as static - in this instance
+    I think that code clarity is worth the risks. The tradeoff is that the
+    class instances are bigger, and it can take longer for the launching class
+    to be garbage collected. -->
+    <Match>
+        <Bug pattern="SIC_INNER_SHOULD_BE_STATIC_ANON"/>
+    </Match>
+
+
+    <!--
+    This bug is flagged if there is a field that has not been initialized in a
+    constructor, that used by the class. Since this is the pattern that Spring is basically built
+    on (setter injection) we are going to filter these bugs out
+    -->
+    <Match>
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+    </Match>
+
+    <!--
+    This bug is around exposing internal representations (eg returning a list).
+    Its such a common pattern (even though it shouldn't really be) that we will ignore it.
+    -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2, EI_EXPOSE_REP"/>
+    </Match>
+
+    <!--
+    turn this off as we never serialize anything using java (although GWT does)
+    -->
+    <Match>
+        <Bug pattern="SE_NO_SERIALVERSIONID"/>
+    </Match>
+
+    <!--
+    All of our domain entities are based on this(they inherit from JpaDomainEntity, which has
+    the equals operator defined in a way that always works for the children)
+    -->
+    <Match>
+        <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+    </Match>
+
+    <!--
+    Turn these off for now, but turn them on later in development
+    -->
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD, UUF_UNUSED_FIELD, DLS_DEAD_LOCAL_STORE"/>
+    </Match>
+
+    <!--
+    START-OF-ARCHPLATFORM-145 : applying findbugs-2.0.1, exclude existing
+    TODO GM : Ideally there would be no exclusions, and all of the code would conform with
+              findbugs (and checkstyles). When upgrading the findbugs, exclusions are used
+              to minimise the number of changes (and the accompanying testing).
+    -->
+    <Match>
+        <Or>
+            <Class name="com.clarity.alarms.alarm.iface.entity.AlarmChannel"/>
+            <Class name="com.clarity.alarms.alarm.server.domain.AggChannelManager"/>
+            <Class name="com.clarity.alarms.alarm.server.service.AlarmAggregator"/>
+            <Class name="com.clarity.alarms.alarms.client.AlarmWindowManagerPresenter$11$1"/>
+            <Class name="com.clarity.alarms.alarms.client.presenter.AlarmRTViewPresenter"/>
+            <Class name="com.clarity.alarms.alarms.client.presenter.AlarmRTViewPresenter$28$1"/>
+            <Class name="com.clarity.bqm.bqm.client.presenter.gauges.BQMGaugeEntityPresenter$2"/>
+            <Class name="com.clarity.bqm.bqm.client.view.gauges.BQMGaugeMonitorDisplay$3"/>
+            <Class name="com.clarity.core.account.server.command.AccountRequestHandlers$SearchAccountRequestHandler"/>
+            <Class name="com.clarity.core.base.client.view.mxgraph.GraphEditor"/>
+            <Class name="com.clarity.core.legacy.server.businessEntities.common.WSAttribute"/>
+            <Class name="com.clarity.core.legacy.server.businessEntities.common.WSFeature"/>
+            <Class name="com.clarity.core.login.server.command.GetActiveUserRoleRequestHandler"/>
+            <Class name="com.clarity.core.workflow.server.engine.bonita.BonitaWorkflowAdapter"/>
+            <Class name="com.clarity.core.workflow.server.engine.bonita.NGBonitaWorkflowAdapter"/>
+            <Class name="com.clarity.discovery.server.domain.AutoDiscoveryHome"/>
+            <Class name="com.clarity.fsm.fsm.iface.domain.reports.operational.FsmOperationalBranchNode"/>
+            <Class name="com.clarity.marketplace.catalog.client.view.ProductAttributeEditor$AttributeInfo"/>
+            <Class name="com.clarity.marketplace.catalog.server.domain.CatalogHome"/>
+            <Class name="com.clarity.catalogcommon.iface.domain.graph.Link"/>
+            <Class name="com.clarity.performancecommon.client.command.PerformanceCommonCommands$4"/>
+            <Class
+                name="com.clarity.performancecommon.client.presenter.detail.component.SelfMonitorSemiDetailOverviewPresenter"/>
+            <Class name="com.clarity.performancecommon.client.view.templates.ColourSelectorControl"/>
+            <Class name="com.clarity.performancecommon.server.commands.ChildMeasuresFetchRequestHandler"/>
+            <Class name="com.clarity.performancecommon.server.domain.DataWarehouseStoredProcedureHelper"/>
+            <Class name="com.clarity.performancecommon.server.domain.PerfDataSourceNetezza"/>
+            <Class name="com.clarity.performancecommon.server.domain.PerformanceHome"/>
+            <Class name="com.clarity.scheduler.server.domain.SchedulerHome"/>
+            <Class name="com.clarity.faultmanager.server.command.CheckUserPrivilegeRequestHandler"/>
+            <Class name="com.clarity.faultmanager.server.command.CreateFaultsRequestHandler"/>
+            <Class name="com.clarity.faultmanager.server.command.FaultWorkGroupReadRequestHandler"/>
+            <Class name="com.clarity.faultmanager.server.command.FindReAssignWorkGroupRequestHandler"/>
+            <Class name="com.clarity.ticketmanager.workflow.client.view.ProductAttributeEditor$AttributeInfo"/>
+            <Class name="com.clarity.visualisation.visualiser.client.main.ViewContainerPresenter"/>
+            <Class name="com.clarity.visualisation.visualiser.server.domain.VisualiserViewDefHome"/>
+            <Class name="com.clarity.bqm.bqm.client.presenter.BQMGaugeEntityPresenter$2"/>
+            <Class name="com.clarity.bqm.bqm.client.view.BQMGaugeMonitorDisplay$3"/>
+            <Class name="com.clarity.performancecommon.client.view.kpicfg.group.KPIThresholdGroupSelectionDisplay$3"/>
+        </Or>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.catalogcommon.server.webservice.types.KeyValuePair"/>
+        <Bug pattern="UWF_UNWRITTEN_PUBLIC_OR_PROTECTED_FIELD"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.performancecommon.iface.util.HealthHelperUtil"/>
+        <Method name="configTemplateByAggregationInterval"/>
+        <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.base.client.navigator.PageRequestParams"/>
+        <Bug pattern="NP_BOOLEAN_RETURN_NULL"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.base.client.navigator.PageRequestParams"/>
+        <Method name="getIntParamStrict"/>
+        <Bug pattern="DRE_DECLARED_RUNTIME_EXCEPTION"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Method name="addSelectedItem"/>
+            <Method name="updateCount"/>
+            <Method name="targetSchedulerListenerHandlerOnDragMove"/>
+            <Method name="onDragStart"/>
+            <Method name="handleEvent"/>
+        </Or>
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_INFERRED"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Class name="com.clarity.alarms.alarms.client.presenter.AlarmFilteringPresenter$6"/>
+            <Class name="com.clarity.alarms.alarms.client.presenter.AlarmHistoryFilterPresenter$9"/>
+        </Or>
+        <Method name="componentSelected"/>
+        <Bug pattern="NP_NULL_PARAM_DEREF"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.alarms.alarms.client.presenter.AlarmHistoryFilterPresenter$9$1"/>
+        <Method name="onSuccess"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH_EXCEPTION"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Method name="generateImage"/>
+            <Method name="getDisplayFields"/>
+        </Or>
+        <Or>
+            <Class name="com.clarity.marketplace.catalogbuilder.client.view.WorkflowAttributeDefProcessDefDisplay"/>
+            <Class name="com.clarity.faultmanager.server.inbox.FaultManagerAssignedToMyWGInboxProvider"/>
+            <Class name="com.clarity.faultmanager.server.inbox.FaultManagerSearchInboxProvider"/>
+        </Or>
+        <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
+    </Match>
+
+    <Match>
+        <Method name="setViewDefParameterViewElement"/>
+        <Class name="com.clarity.core.viewdef.iface.domain.ViewState"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.sso.cas.UserExpiryPreparedStatementCreator"/>
+        <Bug pattern="OBL_UNSATISFIED_OBLIGATION"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <And>
+                <Class name="com.clarity.core.base.client.widget.grid.SearchResultListDisplay$2$1"/>
+                <Method name="loaderBeforeLoad"/>
+            </And>
+            <And>
+                <Class name="com.clarity.core.oss.iface.domain.PortLinkPort$Id"/>
+                <Method name="compareTo"/>
+            </And>
+            <And>
+                <Class name="com.clarity.core.oss.server.BigDecimalToDouble"/>
+                <Or>
+                    <Method name="deepCopy"/>
+                    <Method name="replace"/>
+                </Or>
+            </And>
+            <And>
+                <Class name="com.clarity.marketplace.catalog.server.domain.CatalogHome"/>
+                <Method name="productCostPrice"/>
+            </And>
+            <And>
+                <Class name="com.clarity.performancecommon.client.presenter.detail.PerfKpiDetailAndBreachPresenter"/>
+                <Method name="calculateAndShowBreachTabCount"/>
+            </And>
+            <And>
+                <Class name="com.clarity.performancecommon.server.domain.SelfMonitorHome"/>
+                <Method name="populateThresholdCounts"/>
+            </And>
+            <And>
+                <Class name="com.clarity.visualisation.visualiser.iface.domain.VisualiserPropertiesBean"/>
+                <Or>
+                    <Method name="setLocationViewThreshold"/>
+                    <Method name="geographicViewEdgesThreshold"/>
+                    <Method name="setZoomLevel"/>
+                </Or>
+            </And>
+            <Class name="com.clarity.core.lib.iface.geometry.GPoint"/>
+            <Class name="com.clarity.catalogcommon.server.domain.attribute.lng.LongAttributeDef"/>
+            <Class name="com.clarity.catalogcommon.server.domain.catalog.attribute.rating.RatingPlanAttributeDef"/>
+        </Or>
+        <Bug pattern="BX_UNBOXING_IMMEDIATELY_REBOXED"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.servlet.server.CircuitIFrameServlet"/>
+        <Method name="doGet"/>
+        <Bug pattern="XSS_REQUEST_PARAMETER_TO_SERVLET_WRITER"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.marketplace.servlet.MemoryFileItem"/>
+        <Bug pattern="SE_BAD_FIELD"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.oss.iface.domain.DatasetSpecification$Attribute"/>
+        <Bug pattern="SE_INNER_CLASS"/>
+    </Match>
+
+    <!--
+    ABOVE are the suppressions for base findbug (ARCHPLATFORM-145)
+    BELOW are the suppressions for fb-contrib   (ARCHPLATFORM-145)
+    -->
+
+    <Match>
+        <Class name="com.clarity.core.oss.server.DbUtil"/>
+        <Method name="closeQuietly"/>
+        <Bug pattern="AFBR_ABNORMAL_FINALLY_BLOCK_RETURN"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="CLI_CONSTANT_LIST_INDEX"/>
+    </Match>
+
+    <Match>
+        <Method name="mergeFilter"/>
+        <Class name="com.clarity.alarms.alarm.server.domain.AlarmChannelManager"/>
+        <Bug pattern="DWI_MODIFYING_WHILE_ITERATING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="FCBL_FIELD_COULD_BE_LOCAL"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Class name="com.clarity.core.metageneration.server.apt.GenerateMetasAnnotationProcessor"/>
+            <Class name="com.clarity.core.metageneration.server.apt.GenerateMetasAnnotationProcessor$ListClassVisitor"/>
+            <Class name="com.clarity.core.metageneration.server.apt.GenerateMetasAnnotationProcessorFactory"/>
+        </Or>
+        <Bug pattern="IICU_INCORRECT_INTERNAL_CLASS_USE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.oss.server.DbUtil"/>
+        <Method name="getConnectionInfo"/>
+        <Bug pattern="JVR_JDBC_VENDOR_RELIANCE"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="LEST_LOST_EXCEPTION_STACK_TRACE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.command.server.service.ContextualCommandServiceFn"/>
+        <Bug pattern="LEST_LOST_EXCEPTION_STACK_TRACE"/>
+    </Match>
+
+    <!-- Michael Truong wants this class to contain a shortened  Log name -->
+    <Match>
+        <Class name="com.clarity.core.command.server.service.ContextualCommandServiceFn"/>
+        <Bug pattern="LO_SUSPECT_LOG_CLASS"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Class name="com.clarity.alarms.alarm.iface.event.RawNormalAlarm"/>
+            <Class name="com.clarity.core.account.iface.domain.Individual"/>
+            <Class name="com.clarity.core.account.iface.domain.UserOrgSecurityRole"/>
+            <Class name="com.clarity.core.account.iface.domain.UserRole"/>
+            <Class name="com.clarity.core.account.iface.domain.WorkGroup"/>
+            <Class name="com.clarity.core.account.iface.domain.WorkGroupView"/>
+            <Class name="com.clarity.core.base.client.mvp.PasswordConfirmBindingTarget"/>
+            <Class name="com.clarity.core.queryTree.iface.domain.QueryTree"/>
+        </Or>
+        <Bug pattern="NFF_NON_FUNCTIONAL_FIELD"/>
+    </Match>
+
+    <Match>
+        <!-- Temporary, pending decision from Justin and Mat. -->
+        <Class name="com.clarity.core.base.client.mvp.PasswordConfirmBindingTarget"/>
+        <Bug pattern="SE_TRANSIENT_FIELD_NOT_RESTORED"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Class name="com.clarity.marketplace.catalogbuilder.client.presenter.ProductWorkflowPresenter"/>
+            <Class name="com.clarity.scheduler.server.domain.ScheduleController"/>
+            <Class name="com.clarity.scheduler.server.domain.SchedulerHome"/>
+            <Class name="com.clarity.marketplace.catalogbuilder.client.presenter.ProductWorkflowPresenter"/>
+        </Or>
+        <Bug pattern="OC_OVERZEALOUS_CASTING"/>
+    </Match>
+
+    <Match>
+        <Method name="findMatchingEntity"/>
+        <Class name="com.clarity.visualisation.visualiser.client.view.HierarchicalDrawableBuilder"/>
+        <Bug pattern="PDP_POORLY_DEFINED_PARAMETER"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="PMB_POSSIBLE_MEMORY_BLOAT"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SC_SUSPICIOUS_COMPARATOR_RETURN_VALUES"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="UNNC_UNNECESSARY_NEW_NULL_CHECK"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="WOC_WRITE_ONLY_COLLECTION_FIELD"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="WOC_WRITE_ONLY_COLLECTION_LOCAL"/>
+    </Match>
+
+    <Match>
+        <Or>
+            <Class name="com.clarity.visualisation.visualiser.client.equipment.presenter.EquipmentViewPresenter"/>
+            <Class name="com.clarity.visualisation.visualiser.client.overlay.popup.SingleEquipmentPopupPresenter$3"/>
+            <Class name="com.clarity.visualisation.visualiser.client.overlay.popup.SingleEquipmentPopupPresenter$4"/>
+        </Or>
+        <Bug pattern="BX_UNBOXING_IMMEDIATELY_REBOXED"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.cli.server.domain.CliHome"/>
+        <Method name="searchElementWithActivity"/>
+        <Bug pattern="ISB_INEFFICIENT_STRING_BUFFERING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="DLC_DUBIOUS_LIST_COLLECTION"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="NAB_NEEDLESS_BOX_TO_CAST"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="NAB_NEEDLESS_AUTOBOXING_VALUEOF"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="NAB_NEEDLESS_BOX_TO_UNBOX"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="NAB_NEEDLESS_AUTOBOXING_CTOR"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="PCAIL_POSSIBLE_CONSTANT_ALLOCATION_IN_LOOP"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS"/>
+    </Match>
+
+    <Match>
+        <Method name="loadFromClasspath"/>
+        <Class name="com.clarity.deployment.seeder.tools.SeederContextLoader"/>
+        <Bug pattern="SACM_STATIC_ARRAY_CREATED_IN_METHOD"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_USELESS_TRINARY"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_STRINGBUFFER_WITH_EMPTY_STRING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_USELESS_CASING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_EMPTY_CASING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="UCPM_USE_CHARACTER_PARAMETERIZED_METHOD"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="UEC_USE_ENUM_COLLECTIONS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="ACEM_ABSTRACT_CLASS_EMPTY_METHODS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="CBX_CUSTOM_BUILT_XML"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="CC_CYCLOMATIC_COMPLEXITY"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="CFS_CONFUSING_FUNCTION_SEMANTICS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="COM_COPIED_OVERRIDDEN_METHOD"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EXS_EXCEPTION_SOFTENING_HAS_CHECKED"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CHECKED"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="ITC_INHERITANCE_TYPE_CHECKING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="LII_LIST_INDEXED_ITERATING"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="LO_STUTTERED_MESSAGE"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="MOM_MISLEADING_OVERLOAD_MODEL"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="MRC_METHOD_RETURNS_CONSTANT"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="NOS_NON_OWNED_SYNCHRONIZATION"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="OCP_OVERLY_CONCRETE_PARAMETER"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="PL_PARALLEL_LISTS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SCII_SPOILED_CHILD_INTERFACE_IMPLEMENTATOR"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SEC_SIDE_EFFECT_CONSTRUCTOR"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SMII_STATIC_METHOD_INSTANCE_INVOCATION"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_TEMPORARY_TRIM"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_USE_ISEMPTY"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="TBP_TRISTATE_BOOLEAN_PATTERN"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="UAA_USE_ADD_ALL"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="UCC_UNRELATED_COLLECTION_CONTENTS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="URV_CHANGE_RETURN_TYPE"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="URV_UNRELATED_RETURN_VALUES"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="URV_INHERITED_METHOD_WITH_RELATED_TYPES"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="USBR_UNNECESSARY_STORE_BEFORE_RETURN"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="PCOA_PARTIALLY_CONSTRUCTED_OBJECT_ACCESS"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SGSU_SUSPICIOUS_GETTER_SETTER_USE"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="SPP_EQUALS_ON_ENUM"/>
+    </Match>
+
+    <!--
+    END-OF-ARCHPLATFORM-145 changes
+    -->
+
+    <!--
+    Catchall exception handling is a valid technique.
+    -->
+    <Match>
+        <Bug pattern="REC_CATCH_EXCEPTION"/>
+    </Match>
+
+    <!--this is for the database temporary create user thing-->
+    <Match>
+        <Or>
+            <Class name="com.clarity.core.oss.server.OSSHome"/>
+            <Class name="com.clarity.core.base.server.util.OracleUserManagementUtil"/>
+        </Or>
+        <Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE"/>
+    </Match>
+
+    <!-- next two are nonstandard use of compareto, but slightly more expressive
+    so will leave out the checks for these-->
+    <Match>
+        <Bug pattern="CO_SELF_NO_OBJECT"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EQ_COMPARETO_USE_OBJECT_EQUALS"/>
+    </Match>
+
+
+    <!-- generated code -->
+    <Match>
+        <Package name="~.*com\.clarity\.marketplace\.catalog\.server\.webservice.*"/>
+    </Match>
+
+    <Match>
+        <Package name="~.*com\.clarity\.ticketmanager\.server\.webservice.*"/>
+    </Match>
+
+    <Match>
+        <Package name="~.*com\.clarity\.wfm\.webservice.*"/>
+    </Match>
+
+    <Match>
+        <Package name="~com\.clarity\.bss\.webservice"/>
+    </Match>
+
+    <Match>
+        <Package name="~.*\.visualiser\.service\.proxy"/>
+    </Match>
+
+    <Match>
+        <Package name="~.*\.core\.config\.server\.domain\.complextype"/>
+    </Match>
+
+    <!-- s.out.printlns in the code generation code -->
+    <Match>
+        <Or>
+            <Class name="~.*ListClassVisitor"/>
+            <Class name="com.clarity.deployment.seeder.tools.LoadReportConnect"/>
+        </Or>
+        <Bug pattern="NP_ALWAYS_NULL"/>
+    </Match>
+
+    <!-- s.out.printlns in the tools code -->
+    <Match>
+        <And>
+            <Class name="~.*GenerateUUIDs"/>
+            <Bug pattern="NP_ALWAYS_NULL"/>
+        </And>
+    </Match>
+
+    <Match>
+        <And>
+            <Class name="~.*GenerateFSMPropertyNames"/>
+            <Bug pattern="NP_ALWAYS_NULL"/>
+        </And>
+    </Match>
+
+    <!-- Other -->
+    <Match>
+        <Class name="com.clarity.fsm.fsm.iface.i18n.FSMViewConstants"/>
+    </Match>
+
+    <!-- ignore false mutable array declaration in interface as it's not mutable. -->
+    <Match>
+        <Class name="com.clarity.reportconnect.server.datawarehouse.DbConstants"/>
+    </Match>
+
+    <!-- Ignore creation of prepared statement in the factory class. -->
+    <Match>
+        <Class name="com.clarity.sso.cas.UserExpiryPreparedStatementCreator"/>
+        <Or>
+            <Bug pattern="OBL_UNSATISFIED_OBLIGATION"/>
+            <Bug pattern="OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE"/>
+        </Or>
+    </Match>
+
+    <Match>
+        <Method name="onSuccess"/>
+        <Class name="com.clarity.cli.client.presenter.CliScriptPanelPresenter$RunCommandCallback"/>
+        <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+    </Match>
+
+    <Match>
+        <And>
+            <Class name="com.clarity.commons.server.security.EncryptionProcessor"/>
+            <Bug pattern="NP_ALWAYS_NULL"/>
+        </And>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.performancecommon.client.model.PerfBreachGroupingMetaModelData"/>
+        <Bug pattern="BC_UNCONFIRMED_CAST"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.performancecommon.client.model.PerfBreachGroupingMetaModelData"/>
+        <Bug pattern="BC_UNCONFIRMED_CAST"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.performancecommon.client.model.PerfBreachGroupingMetaModelData"/>
+        <Bug pattern="BC_UNCONFIRMED_CAST"/>
+    </Match>
+
+    <!--TODO: SM: FIX it later-->
+    <Match>
+        <Class name="com.clarity.base.driver.ClarityTMWSQuery"/>
+        <Bug pattern="BC_IMPOSSIBLE_CAST"/>
+    </Match>
+
+</FindBugsFilter>
+
