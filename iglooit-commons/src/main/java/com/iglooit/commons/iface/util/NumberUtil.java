@@ -1,6 +1,6 @@
 package com.iglooit.commons.iface.util;
 
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.AppX;
 
 import java.math.BigDecimal;
 import java.util.Date;

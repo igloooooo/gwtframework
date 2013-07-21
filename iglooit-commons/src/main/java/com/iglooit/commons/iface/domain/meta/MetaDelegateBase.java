@@ -1,7 +1,7 @@
 package com.iglooit.commons.iface.domain.meta;
 
-import com.clarity.commons.iface.annotation.NoMetaAccess;
-import com.clarity.commons.iface.type.NoMetaPropertyNameX;
+import com.iglooit.commons.iface.annotation.NoMetaAccess;
+import com.iglooit.commons.iface.type.NoMetaPropertyNameX;
 
 import java.util.Collections;
 import java.util.HashMap;

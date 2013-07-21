@@ -53,6 +53,15 @@
             <snapshots><enabled>false</enabled></snapshots>
             <releases><enabled>true</enabled></releases>
         </repository>
+        <repository>
+            <id>thirdparty-releases</id>
+            <name>JBoss Thirdparty Releases</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases</url>
+        </repository>
+        <repository>
+            <id>gwteventservice</id>
+            <url>http://gwteventservice.googlecode.com/svn/maven/repository-snapshots</url>
+        </repository>
     </repositories>
 
     <build>

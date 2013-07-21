@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <suppress checks="RegexpCheck" files="EncryptionProcessor.java"/>
+    <suppress checks="RegexpCheck" files="com.clarity.jmx.connection.BQMCache" />
+    <suppress checks="RegexpCheck" files="com.clarity.monitor.client.MonitorClient" />
+    <suppress checks="InnerAssignmentCheck" files="com.clarity.monitor.client.MonitorClient" />
+
+</suppressions>
+

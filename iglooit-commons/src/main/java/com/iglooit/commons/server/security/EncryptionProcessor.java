@@ -1,11 +1,11 @@
 package com.iglooit.commons.server.security;
 
-import com.clarity.commons.iface.annotation.EncryptedString;
-import com.clarity.commons.iface.domain.Encryptable;
-import com.clarity.commons.iface.type.AppX;
-import com.clarity.commons.iface.type.NonSerOpt;
-import com.clarity.commons.server.util.MetaUtil;
-import com.clarity.commons.server.util.ReflectionUtil;
+import com.iglooit.commons.iface.annotation.EncryptedString;
+import com.iglooit.commons.iface.domain.Encryptable;
+import com.iglooit.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.NonSerOpt;
+import com.iglooit.commons.server.util.MetaUtil;
+import com.iglooit.commons.server.util.ReflectionUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;

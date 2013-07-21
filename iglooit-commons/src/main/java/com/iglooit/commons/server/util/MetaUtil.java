@@ -1,9 +1,9 @@
 package com.iglooit.commons.server.util;
 
-import com.clarity.commons.iface.annotation.NoMetaAccess;
-import com.clarity.commons.iface.domain.meta.DelegatingMetaEntity;
-import com.clarity.commons.iface.type.NonSerOpt;
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.annotation.NoMetaAccess;
+import com.iglooit.commons.iface.domain.meta.DelegatingMetaEntity;
+import com.iglooit.commons.iface.type.NonSerOpt;
+import com.iglooit.commons.iface.type.Option;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

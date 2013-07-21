@@ -4,29 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.clarity</groupId>
+    <groupId>com.iglooit</groupId>
     <artifactId>tools</artifactId>
-    <name>Clarity Thin Client Tools</name>
+    <name>Iglooit Thin Client Tools</name>
     <description>External Tools for the thin client and manipulation of it's data</description>
     <packaging>pom</packaging>
     <version>trunk-SNAPSHOT</version>
 
     <modules>
         <module>build-conf</module>
-        <module>performanceImportExport</module>
     </modules>
 
     <parent>
-        <artifactId>clarity-top-level</artifactId>
-        <groupId>com.clarity</groupId>
+        <artifactId>iglooit-top-level</artifactId>
+        <groupId>com.iglooit</groupId>
         <version>trunk-SNAPSHOT</version>
     </parent>
-    <repositories>
-         <repository>
-             <id>snapshots.int.archiva1.clarity.com</id>
-             <url>http://int-archiva1.clarity.com:8081/archiva/repository/snapshots/</url>
-         </repository>
-     </repositories>
     <build>
        <plugins>
 
@@ -39,15 +32,15 @@
                    <artifactItems>
                        <artifactItem>
                            <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
-                           <groupId>com.clarity</groupId>
-                           <artifactId>clarity-tools-build-conf</artifactId>
+                           <groupId>com.iglooit</groupId>
+                           <artifactId>iglooit-tools-build-conf</artifactId>
                            <version>${pom.version}</version>
                        </artifactItem>
                    </artifactItems>
                </configuration>
                <executions>
                    <execution>
-                       <id>unpack-clarity-tools-build-conf</id>
+                       <id>unpack-iglooit-tools-build-conf</id>
                        <phase>generate-resources</phase>
                        <goals>
                            <goal>unpack</goal>
@@ -56,8 +49,8 @@
                            <artifactItems>
                                <artifactItem>
                                    <outputDirectory>${project.build.directory}/build-conf/</outputDirectory>
-                                   <groupId>com.clarity</groupId>
-                                   <artifactId>clarity-tools-build-conf</artifactId>
+                                   <groupId>com.iglooit</groupId>
+                                   <artifactId>iglooit-tools-build-conf</artifactId>
                                    <version>${pom.version}</version>
                                </artifactItem>
                            </artifactItems>

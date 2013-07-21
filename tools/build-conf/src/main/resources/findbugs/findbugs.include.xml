@@ -1,0 +1,9 @@
+<FindBugsFilter>
+
+    <Match>
+        <Class name="~com.*"/>
+    </Match>
+
+</FindBugsFilter>
+
+

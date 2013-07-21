@@ -1,6 +1,6 @@
 package com.iglooit.commons.iface.util;
 
-import com.clarity.commons.iface.type.UUID;
+import com.iglooit.commons.iface.type.UUID;
 
 public class UUIDUtil
 {

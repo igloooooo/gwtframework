@@ -1,6 +1,6 @@
 package com.iglooit.commons.iface.um;
 
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.type.Option;
 
 import java.io.Serializable;
 import java.util.Arrays;

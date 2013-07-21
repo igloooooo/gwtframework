@@ -1,8 +1,8 @@
 package com.iglooit.commons.iface.domain.meta;
 
-import com.clarity.commons.iface.annotation.BeanLibIgnore;
-import com.clarity.commons.iface.annotation.NoMetaAccess;
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.annotation.BeanLibIgnore;
+import com.iglooit.commons.iface.annotation.NoMetaAccess;
+import com.iglooit.commons.iface.type.AppX;
 
 import java.io.Serializable;
 import java.util.Collection;
