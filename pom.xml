@@ -14,6 +14,7 @@
     <modules>
         <module>tools</module>
         <module>iglooit-commons</module>
+        <module>iglooit-sso</module>
         <module>modules</module>
     </modules>
 

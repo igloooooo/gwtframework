@@ -1,11 +1,11 @@
 package com.iglooit.core.base.iface.command.request;
 
-import com.clarity.core.base.iface.command.Request;
-import com.clarity.core.base.iface.command.Response;
-import com.clarity.commons.iface.domain.SearchPaging;
-import com.clarity.commons.iface.domain.OrderBy;
-import com.clarity.commons.iface.domain.SearchSorting;
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.domain.OrderBy;
+import com.iglooit.commons.iface.domain.SearchPaging;
+import com.iglooit.commons.iface.domain.SearchSorting;
+import com.iglooit.commons.iface.type.Option;
+import com.iglooit.core.base.iface.command.Request;
+import com.iglooit.core.base.iface.command.Response;
 
 public abstract class PagingRequest<ResponseType extends Response> extends Request<ResponseType>
 {

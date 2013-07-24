@@ -1,8 +1,8 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.domain.ValidationResult;
-import com.clarity.commons.iface.domain.Validator;
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.domain.ValidationResult;
+import com.iglooit.commons.iface.domain.Validator;
+import com.iglooit.commons.iface.type.Option;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import javax.xml.bind.annotation.XmlType;

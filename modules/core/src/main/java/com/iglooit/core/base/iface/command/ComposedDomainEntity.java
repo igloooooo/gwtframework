@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.core.base.iface.domain.JpaDomainEntity;
-import com.clarity.commons.iface.type.UUID;
+import com.iglooit.commons.iface.type.UUID;
+import com.iglooit.core.base.iface.domain.JpaDomainEntity;
 
 import java.io.Serializable;
 
@@ -26,7 +26,7 @@ public abstract class ComposedDomainEntity<DE extends JpaDomainEntity<DE>> imple
 
         ComposedDomainEntity that = (ComposedDomainEntity)o;
 
-        final UUID id = getId();
+        final Long id = getId();
         if (id != null ? !id.equals(that.getId()) : that.getId() != null) return false;
 
         return true;
@@ -35,11 +35,11 @@ public abstract class ComposedDomainEntity<DE extends JpaDomainEntity<DE>> imple
     @Override
     public int hashCode()
     {
-        final UUID id = getId();
+        final Long id = getId();
         return id == null ? super.hashCode() : id.hashCode();
     }
 
-    public UUID<DE> getId()
+    public Long getId()
     {
         return domainEntity.getId();
     }

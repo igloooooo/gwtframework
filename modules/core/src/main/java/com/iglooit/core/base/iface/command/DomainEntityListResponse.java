@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.commons.iface.domain.meta.Meta;
+import com.iglooit.commons.iface.domain.meta.Meta;
 
 import java.util.List;
 

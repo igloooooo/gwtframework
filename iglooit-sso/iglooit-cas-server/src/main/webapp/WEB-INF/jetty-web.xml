@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+    <New id="jndidsum" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>java:comp/env/jdbc/umDS</Arg>
+        <Arg>
+            <New class="oracle.jdbc.pool.OracleDataSource">
+                <Set name="connectionCachingEnabled">true</Set>
+                <Set name="dataSourceName">umDS</Set>
+                <!-- TODO: Set these values before running Jetty in dev mode -->
+                <Set name="URL"><SystemProperty name="clarity.umds.url" default="jdbc:oracle:thin:@CLADEVNS130.pwr.com.au:1521:trunkint"/></Set>
+                <Set name="user"><SystemProperty name="clarity.umds.user" default="clarity_background"/></Set>
+                <Set name="password"><SystemProperty name="clarity.umds.password" default="cbackground"/></Set>
+            </New>
+        </Arg>
+    </New>
+    <New id="jndidscas" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>java:comp/env/jdbc/casDS</Arg>
+        <Arg>
+            <New class="oracle.jdbc.pool.OracleDataSource">
+                <Set name="connectionCachingEnabled">true</Set>
+                <Set name="dataSourceName">clarityDS</Set>
+                <!-- TODO: Set these values before running Jetty in dev mode -->
+                <Set name="URL"><SystemProperty name="clarity.casds.url" default="jdbc:oracle:thin:@CLADEVNS130.pwr.com.au:1521:trunkint"/></Set>
+                <Set name="user"><SystemProperty name="clarity.casds.user" default="clarity_cas"/></Set>
+                <Set name="password"><SystemProperty name="clarity.casds.password" default="cltyca$pa$$"/></Set>
+            </New>
+        </Arg>
+    </New>
+
+</Configure>

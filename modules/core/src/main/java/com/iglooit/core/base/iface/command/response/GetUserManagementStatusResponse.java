@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command.response;
 
-import com.clarity.core.base.iface.command.Response;
+import com.iglooit.core.base.iface.command.Response;
 
 public class GetUserManagementStatusResponse extends Response
 {

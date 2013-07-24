@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command.response;
 
-import com.clarity.commons.iface.domain.DateCacheEntry;
-import com.clarity.core.base.iface.command.Response;
+import com.iglooit.commons.iface.domain.DateCacheEntry;
+import com.iglooit.core.base.iface.command.Response;
 
 import java.util.Date;
 

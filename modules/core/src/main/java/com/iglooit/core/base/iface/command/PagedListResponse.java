@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.commons.iface.domain.SearchPaging;
+import com.iglooit.commons.iface.domain.SearchPaging;
 
 import java.util.List;
 

@@ -95,21 +95,6 @@
             <version>1.5.0</version>
         </dependency>
 
-        <!-- Bonita -->
-        <dependency>
-            <groupId>org.bonitasoft</groupId>
-            <artifactId>bonita</artifactId>
-            <version>5.5</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bonitasoft</groupId>
-            <artifactId>bonita-email-connector</artifactId>
-            <version>5.2</version>
-            <scope>compile</scope>
-        </dependency>
-
         <dependency>
             <groupId>net.sf.beanlib.local</groupId>
             <artifactId>beanlib</artifactId>
@@ -617,16 +602,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--
-            do not change the version of this dependency when creating new branches, unless
-            you deploy a copy of the jar into archiva...
-        -->
-        <dependency>
-            <groupId>com.clarity</groupId>
-            <artifactId>clarity-bss-cli-webservices-client</artifactId>
-            <version>1.6-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -637,7 +612,7 @@
     </dependencies>
 
     <build>
-        <finalName>clarity-core</finalName>
+        <finalName>iglooit-core</finalName>
 
         <pluginManagement>
             <plugins>
@@ -762,10 +737,10 @@
                             <includeProjectDependencies>false</includeProjectDependencies>
                             <includePluginDependencies>true</includePluginDependencies>
                             <executableDependency>
-                                <groupId>com.clarity</groupId>
+                                <groupId>com.iglooit</groupId>
                                 <artifactId>config-file-checker</artifactId>
                             </executableDependency>
-                            <mainClass>com.clarity.tools.PropertiesDiff</mainClass>
+                            <mainClass>com.iglooit.tools.PropertiesDiff</mainClass>
                             <arguments>
                                 <argument>-t</argument>
                                 <argument>${clarity_home}</argument>
@@ -775,7 +750,7 @@
                         </configuration>
                         <dependencies>
                             <dependency>
-                                <groupId>com.clarity</groupId>
+                                <groupId>com.iglooit</groupId>
                                 <artifactId>config-file-checker</artifactId>
                                 <version>${parent.version}</version>
                             <type>jar</type>
@@ -804,10 +779,10 @@
                             <includeProjectDependencies>false</includeProjectDependencies>
                             <includePluginDependencies>true</includePluginDependencies>
                             <executableDependency>
-                                <groupId>com.clarity</groupId>
+                                <groupId>com.iglooit</groupId>
                                 <artifactId>config-file-checker</artifactId>
                             </executableDependency>
-                            <mainClass>com.clarity.tools.PropertiesDiff</mainClass>
+                            <mainClass>com.iglooit.tools.PropertiesDiff</mainClass>
                             <arguments>
                                 <argument>-t</argument>
                                 <argument>../</argument>
@@ -816,7 +791,7 @@
                         </configuration>
                         <dependencies>
                             <dependency>
-                                <groupId>com.clarity</groupId>
+                                <groupId>com.iglooit</groupId>
                                 <artifactId>config-file-checker</artifactId>
                                 <version>${parent.version}</version>
                             <type>jar</type>

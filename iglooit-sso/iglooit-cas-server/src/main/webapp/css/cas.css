@@ -1,0 +1,251 @@
+/* RESET --------------------------------- */
+/* reset some properties for elements since defaults are not crossbrowser - http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/ */
+html,body,div,span,h1,h2,h3,p,a,img,ul,li,fieldset,form,label,legend {margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline;}
+:focus {outline:0;}
+ul {list-style:none; font-size:1.1em; padding:0 0 18px 40px;}
+
+/* browser default font-size is 16px which is too big so we make it 16px x 62.5% = 10px */
+body {font:normal 400 62.5%/1.0 helvetica, arial, sans-serif; min-width:960px; background:transparent; color:#333;}
+
+/*
+ - used to clear or contain floats within a non-floated container
+ - this ruleset is used by UAs that handle :after - not IE - see ie_cas.css for IE fix
+http://www.positioniseverything.net/easyclearing.html and http://www.ejeliot.com/blog/59 */
+#header:after, #content:after, #footer:after, .clearfix:after {content:"."; clear:both; display:block; height:0; visibility:hidden;}
+
+
+/* ================================================================ */
+/* Clarity															*/
+/* ================================================================ */
+
+/* Global
+--------------------------------------------------------------------*/
+html, body {
+	overflow:auto;
+	background-color:transparent;
+	height:100%;
+}
+
+body {
+	min-width:300px;
+	background-color:transparent;
+}
+
+#cas {
+	background:#c5ccd2 url(../images/login-page-bg.jpg) center center no-repeat;
+}
+
+.corners {
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    -moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+}
+
+/* Messages
+--------------------------------------------------------------------*/
+.info, .errors, .success {
+	clear:both; 
+	margin:18px 0; 
+	padding:20px 20px 20px 100px; 
+	font-size:10px; 
+	line-height:1.5;
+	text-align:left;
+	font-size:12px;
+	border:1px solid;
+}
+.info {border-color:#7EA7BF; background:#DAECF8 url(../images/info.png) no-repeat 20px 18px; color:#466C90;}
+.errors {border-color:#d21033; background:#FEE7E0 url(../images/error.png) no-repeat 20px 18px; color:#d21033;}
+.success {border-color:#390; background:#dfa url(../images/success.png) no-repeat 20px 18px; color:#390;}
+
+#content .errors h2, #content .success h2, #content .info h2 {
+	font-size:18px; 
+	font-weight:400; 
+	margin:0 18px 0 0; 
+	padding:0;
+}
+#content .success h2 {color: #008 !important;}
+#content .errors h2 {color:#b00 !important;}
+#content .success h2 {color:#060 !important;}
+
+#content #msg {
+	width:320px; 
+	-moz-box-shadow: 0 4px 4px #b2becc, inset 0 0 3px #fff;
+	-webkit-box-shadow: 0 4px 4px #b2becc, inset 0 0 3px #fff;
+	box-shadow: 0 4px 4px #b2becc, inset 0 0 3px #fff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	min-height:40px;
+}
+
+/* static messages */
+#content #msg p {padding:0;}
+
+#content #login #msg {
+	width:auto;
+	-moz-box-shadow: 0 0 3px #fff, inset 0 0 3px #ccc;
+	-webkit-box-shadow: 0 0 3px #fff, inset 0 0 3px #ccc;
+	box-shadow: 0 0 3px #fff, inset 0 0 3px #ccc;
+}
+
+#content #msg.errors {
+	border-color:rgba(210, 16, 51, 0.4);
+}
+
+#content #login #msg.errors {
+	background-position:20px 15px;
+}
+
+/* Login Box
+--------------------------------------------------------------------*/
+#cas td {
+    padding-bottom:50px;
+}
+
+#cas .box {
+    border:1px solid #aab4bf;
+    padding:10px 20px;
+    margin-left:auto;
+    margin-right:auto;
+    width:400px;
+    background: -moz-linear-gradient(top, #fafafa, #D8E0E3);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(#D8E0E3));
+	background: -o-linear-gradient(top, #fafafa, #D8E0E3);
+	background: linear-gradient(to bottom, #fafafa 0%,#D8E0E3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#D8E0E3',GradientType=0 );
+	-moz-box-shadow: 0 4px 5px #b2becc, inset 0 0 3px rgba(255, 255, 255, 0.7);
+	-webkit-box-shadow: 0 4px 5px #b2becc, inset 0 0 3px rgba(255, 255, 255, 0.7);
+	box-shadow: 0 4px 5px #b2becc, inset 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+
+#cas #login .header {
+	margin-top:10px;
+    margin-bottom:10px;
+}
+
+#cas #login .header h2 {
+    color:#485867;
+    font-size:1.4em;
+    font-weight:bold;
+    text-shadow:0 1px 0 #fff;
+    padding-top:10px;
+}
+
+#cas #login .header .logo {
+    background:url(../images/logo.png) top center no-repeat;
+    width:130;
+    height:50px;
+    margin:0 auto;
+}
+
+
+/* Form Elements
+--------------------------------------------------------------------*/
+.required {background:#ffd;}
+.error {background:#FFFAF7;}
+input.required {border-width:1px;}
+
+label {cursor:pointer;font-size:1.1em;}
+input {border-width:1px; color:#333; padding:3px;vertical-align: middle;}
+
+#cas form label {text-shadow:0 1px 0 #fff;}
+
+#cas form .field-pair label, #cas form .field-pair input  {
+	font-size:1.7em; 
+	float:left; 
+	text-align:left;
+}
+
+#cas form .field-pair {padding:8px 5px;}	
+#cas form .field-pair label {
+	width:100px; 
+	color:#485867;
+	line-height:1.7em;
+	position:relative;
+}
+#cas form label span.accesskey {text-decoration:underline;}
+#cas form .field-pair input {
+	width:70%;
+	background:#fff;
+	border:1px solid #BAC2C7; 
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	-moz-box-shadow:inset 0 0 2px #ccc;
+	-webkit-box-shadow:inset 0 0 2px #ccc;
+	box-shadow:inset 0 0 2px #ccc;
+}
+#cas form input.error {
+	border-color:rgba(210, 16, 51, 0.5); 
+	background:#FFFAF7; 
+	color:#b00;
+}
+
+#cas form .check {padding-left:100px;}
+#cas form .check input {float:left;}
+#cas form .check label {float:left; line-height:2; padding-left:5px;color:#6A7989;}
+	
+#cas form .btn-row {
+	padding-top:20px;
+	padding-bottom:15px;
+	padding-left:105px;
+	text-align:left;
+}
+	
+#cas form .btn-row .btn-submit {
+	color:#fff;
+	text-shadow:0 -1px 0 #555;
+	border: 1px solid #485867;
+	cursor:pointer;
+	font-weight:bold;
+	padding: 5px 15px;
+	background: -moz-linear-gradient(top, #9dabbc, #657687);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#9dabbc), to(#657687));
+	background: -o-linear-gradient(top, #9dabbc, #657687);
+	background: linear-gradient(to bottom, #9dabbc 0%,#657687 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dabbc', endColorstr='#657687',GradientType=0 );
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	font-size:1.3em;
+	-moz-box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.5);
+	-webkit-box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.5);
+	box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.5);
+}
+	
+#cas form .btn-row .btn-submit:hover {
+	border-color:#485867;
+	background: -moz-linear-gradient(top, #b7bfc9, #78899a);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b7bfc9), to(#78899a));
+	background: -o-linear-gradient(top, #b7bfc9, #78899a);
+	background: linear-gradient(to bottom, #b7bfc9 0%,#78899a 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b7bfc9', endColorstr='#78899a',GradientType=0 );
+	-moz-box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.8);
+	-webkit-box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.8);
+	box-shadow:inset 0 0 1px rgba(255, 255, 255, 0.8);
+}
+	
+#cas form .btn-row .btn-submit:focus {
+	-moz-box-shadow:inset 0 0 3px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow:inset 0 0 3px rgba(0, 0, 0, 0.5);
+	box-shadow:inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+	
+#cas form .btn-row .btn-reset {
+	border:0;
+	background:transparent;
+	cursor:pointer;
+	color:#6A7989;
+	margin-left:5px;
+	text-shadow:0 1px 0 #fff;
+}
+	
+#cas form .btn-row .btn-reset:hover {
+	color:#ff5200;
+	text-decoration:underline;
+}
+

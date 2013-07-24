@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command.response;
 
-import com.clarity.core.base.iface.command.Response;
-import com.clarity.commons.iface.type.Tuple3;
+import com.iglooit.commons.iface.type.Tuple3;
+import com.iglooit.core.base.iface.command.Response;
 
 public class Tuple3Response<A, B, C> extends Response
 {

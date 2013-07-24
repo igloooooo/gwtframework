@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.AppX;
 
 public class UpdateRequest<ResponseType extends Response> extends Request<ResponseType>
 {

@@ -1,0 +1,91 @@
+<FindBugsFilter>
+
+    <!--
+    Inner classes dont have to be declared as static - in this instance
+    I think that code clarity is worth the risks. The tradeoff is that the
+    class instances are bigger, and it can take longer for the launching class
+    to be garbage collected. -->
+    <Match>
+        <Bug pattern="SIC_INNER_SHOULD_BE_STATIC_ANON"/>
+    </Match>
+
+    <!-- tend to get this one with dependency injected variables in maven mojos -->
+    <Match>
+        <Bug pattern="UWF_UNWRITTEN_FIELD"/>
+    </Match>
+
+
+    <!--
+    This bug is flagged if there is a field that has not been initialized in a
+    constructor, that used by the class. Since this is the pattern that Spring is basically built
+    on (setter injection) we are going to filter these bugs out
+    -->
+    <Match>
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+    </Match>
+
+    <!--
+    This bug is around exposing internal representations (eg returning a list).
+    Its such a common pattern (even though it shouldn't really be) that we will ignore it.
+    -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2, EI_EXPOSE_REP"/>
+    </Match>
+
+    <!--
+    turn this off as we never serialize anything using java (although GWT does)
+    -->
+    <Match>
+        <Bug pattern="SE_NO_SERIALVERSIONID"/>
+    </Match>
+
+    <!--
+    All of our domain entities are based on this(they inherit from JpaDomainEntity, which has
+    the equals operator defined in a way that always works for the children)
+    -->
+    <Match>
+        <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
+    </Match>
+
+    <!-- next two are nonstandard use of compareto, but slightly more expressive
+    so will leave out the checks for these-->
+    <Match>
+        <Bug pattern="CO_SELF_NO_OBJECT"/>
+    </Match>
+
+    <Match>
+        <Bug pattern="EQ_COMPARETO_USE_OBJECT_EQUALS"/>
+    </Match>
+
+    <!--
+    Turn these off for now, but turn them on later in development
+    -->
+    <Match>
+        <Bug pattern="URF_UNREAD_FIELD, UUF_UNUSED_FIELD, DLS_DEAD_LOCAL_STORE"/>
+    </Match>
+
+    <!--
+    Catchall exception handling is a valid technique.
+    -->
+    <Match>
+        <Bug pattern="REC_CATCH_EXCEPTION"/>
+    </Match>
+
+    <!--this is for the database temporary create user thing-->
+    <Match>
+        <Class name="com.clarity.core.oss.server.OSSHome"/>
+        <Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.clarity.core.base.server.util.OracleUserManagementUtil" />
+        <Bug pattern="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE" />
+    </Match>
+
+    <Match>
+        <Package name="~.*com\.clarity\.bss\.webservice\..*"/>
+    </Match>
+
+
+</FindBugsFilter>
+

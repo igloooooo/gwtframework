@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.core.base.iface.domain.JpaDomainEntity;
-import com.clarity.core.base.iface.domain.Validatable;
+import com.iglooit.core.base.iface.domain.JpaDomainEntity;
+import com.iglooit.core.base.iface.domain.Validatable;
 
 import java.util.Arrays;
 import java.util.List;

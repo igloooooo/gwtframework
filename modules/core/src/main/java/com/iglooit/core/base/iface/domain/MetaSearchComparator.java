@@ -1,8 +1,8 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.domain.meta.Meta;
-import com.clarity.commons.iface.domain.SearchSorting;
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.domain.SearchSorting;
+import com.iglooit.commons.iface.domain.meta.Meta;
+import com.iglooit.commons.iface.type.Option;
 
 import java.util.Comparator;
 

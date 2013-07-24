@@ -1,13 +1,12 @@
 package com.iglooit.core.lib.iface;
 
-import com.clarity.commons.iface.domain.I18NFactoryProvider;
-import com.clarity.commons.iface.util.TimeUtil;
+import com.iglooit.commons.iface.domain.I18NFactoryProvider;
+import com.iglooit.commons.iface.util.TimeUtil;
 import com.extjs.gxt.ui.client.widget.form.Time;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.TimeZone;
 import com.scheduler.client.core.DateUtil;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class BssTimeUtil extends TimeUtil
@@ -34,17 +33,6 @@ public class BssTimeUtil extends TimeUtil
         Date myDate = new Date(d.getTime());
         DateUtil.clearTime(myDate);
         return myDate;
-    }
-
-    public static Date getEndOfDay(Date d)
-    {
-        Date myDate = getBeginningOfDay(d);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(myDate);
-        cal.add(Calendar.HOUR, 23);
-        cal.add(Calendar.MINUTE, 59);
-        cal.add(Calendar.SECOND, 59);
-        return cal.getTime();
     }
 
     public static Date getBeginningOfDayBefore(Date date)

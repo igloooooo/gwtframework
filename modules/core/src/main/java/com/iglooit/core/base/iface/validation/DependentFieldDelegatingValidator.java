@@ -1,8 +1,8 @@
 package com.iglooit.core.base.iface.validation;
 
-import com.clarity.commons.iface.domain.meta.Meta;
-import com.clarity.commons.iface.domain.ValidationResult;
-import com.clarity.commons.iface.domain.Validator;
+import com.iglooit.commons.iface.domain.ValidationResult;
+import com.iglooit.commons.iface.domain.Validator;
+import com.iglooit.commons.iface.domain.meta.Meta;
 
 import java.util.Collections;
 import java.util.List;

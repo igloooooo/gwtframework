@@ -1,8 +1,8 @@
 package com.iglooit.core.base.iface.command.request;
 
-import com.clarity.core.base.iface.command.Request;
-import com.clarity.core.base.iface.command.Response;
-import com.clarity.commons.iface.type.UUID;
+import com.iglooit.commons.iface.type.UUID;
+import com.iglooit.core.base.iface.command.Request;
+import com.iglooit.core.base.iface.command.Response;
 
 public class UUIDRequest<T, ResponseType extends Response>
     extends Request<ResponseType>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <!--
+    Some LDAP configuration is in lppe-configuration.xml
+    Instructions on how to enable LDAP Password Policy Enforcement (LPPE):
+    https://wiki.jasig.org/pages/viewpage.action?pageId=26149328
+    -->
+    <bean id="authenticationManager"
+          class="org.jasig.cas.authentication.AuthenticationManagerImpl">
+
+        <property name="credentialsToPrincipalResolvers">
+            <list>
+                <bean class="org.jasig.cas.authentication.principal.CredentialsToLDAPAttributePrincipalResolver">
+                    <!-- The Principal resolver form the credentials -->
+                    <property name="credentialsToPrincipalResolver">
+                        <bean class="org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver"/>
+                    </property>
+                    <!-- The query made to find the Principal ID. "%u" will be replaced by the resolved Principal -->
+                    <property name="filter" value="${ldap.authentication.filter}"/>
+                    <!-- The attribute used to define the new Principal ID -->
+                    <property name="principalAttributeName" value="${ldap.authentication.principle.attribute}"/>
+                    <property name="searchBase" value="${ldap.authentication.basedn}"/>
+                    <property name="contextSource" ref="contextSource"/>
+                    <property name="attributeRepository">
+                        <ref bean="attributeRepository"/>
+                    </property>
+                </bean>
+                <bean class="org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver"/>
+            </list>
+        </property>
+
+        <property name="authenticationHandlers">
+            <list>
+                <bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+                      p:httpClient-ref="httpClient"/>
+                <!-- LDAP with LPPE -->
+                <ref bean="lppeEnabledLdapAuthenticationHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="userDetailsService"
+          class="org.springframework.security.cas.userdetails.GrantedAuthorityFromAssertionAttributesUserDetailsService">
+        <constructor-arg>
+            <list>
+                <value>authorities</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="default-role" class="java.lang.String">
+        <constructor-arg value="${cas.securityContext.serviceProperties.defaultUserRole}"/>
+    </bean>
+
+    <bean id="cas-admin-role" class="java.lang.String">
+        <constructor-arg value="${cas.securityContext.serviceProperties.adminRoles}"/>
+    </bean>
+
+    <bean id="cas-admin-user" class="java.lang.String">
+        <constructor-arg value="${cas.securityContext.serviceProperties.adminUser}"/>
+    </bean>
+
+    <bean id="defaultOrganization" class="java.lang.String">
+        <constructor-arg value="${client.defaultAccount}"/>
+    </bean>
+
+    <!-- Custom: Load roles from Clarity database. -->
+    <bean id="attributeRepository" class="com.clarity.sso.cas.ClarityPersonAttributeDao"/>
+    <!-- LDAP: Use LDAP group membership to find authorities. -->
+    <!--<bean id="attributeRepository" class="org.jasig.services.persondir.support.ldap.LdapPersonAttributeAndRoleDao">
+        <property name="contextSource" ref="contextSource"/>
+        <property name="baseDN" value="${ldap.authentication.basedn}"/>
+        <property name="requireAllQueryAttributes" value="true"/>
+        &lt;!&ndash; Attribute mapping between principal (key) and LDAP (value) names used to perform the LDAP search.
+        By default, multiple search criteria are ANDed together.  Set the queryType property to change to OR. &ndash;&gt;
+        <property name="queryAttributeMapping">
+            <map>
+                <entry key="username" value="uid"/>
+            </map>
+        </property>
+        <property name="resultAttributeMapping">
+            <map>
+                &lt;!&ndash; Mapping beetween LDAP entry attributes (key) and Principal's (value) &ndash;&gt;
+                <entry key="mail" value="email"/>
+                <entry key="authorities" value="authorities"/>
+            </map>
+        </property>
+        <property name="ldapAuthoritiesPopulator" ref="ldapAuthoritiesPopulator"/>
+    </bean>
+    <bean id="ldapAuthoritiesPopulator"
+          class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+        <constructor-arg ref="contextSource"/>
+        <constructor-arg value="ou=groups,dc=clarity"/>
+        <property name="groupRoleAttribute" value="cn"/>
+        <property name="groupSearchFilter" value="(uniqueMember={0})"/>
+    </bean>-->
+
+    <bean id="serviceRegistryDao" class="org.jasig.cas.services.JpaServiceRegistryDaoImpl"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+    <!-- This is the EntityManagerFactory configuration for Hibernate -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="casDataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                <!-- Set this to false in the production environment. -->
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="auditTrailManager" class="com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager"/>
+
+    <bean id="healthCheckMonitor" class="org.jasig.cas.monitor.HealthCheckMonitor">
+        <property name="monitors">
+            <list>
+                <bean class="org.jasig.cas.monitor.MemoryMonitor"
+                      p:freeMemoryWarnThreshold="10"/>
+                <!--
+                  NOTE
+                  The following ticket registries support SessionMonitor:
+                    * DefaultTicketRegistry
+                    * JpaTicketRegistry
+                  Remove this monitor if you use an unsupported registry.
+                -->
+                <bean class="org.jasig.cas.monitor.SessionMonitor"
+                      p:ticketRegistry-ref="ticketRegistry"
+                      p:serviceTicketCountWarnThreshold="5000"
+                      p:sessionCountWarnThreshold="100000"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="casDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/casDS"/>
+    </bean>
+
+</beans>

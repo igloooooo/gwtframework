@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>iglooit-top-level</artifactId>
+        <groupId>com.iglooit</groupId>
+        <version>trunk-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.iglooit</groupId>
+    <artifactId>iglooit-sso</artifactId>
+    <name>Iglooit SSO</name>
+    <!-- middle tier empty pom must be hard ref -->
+    <version>trunk-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <junit.version>4.10</junit.version>
+        <maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
+        <maven.build.helper.plugin.version>1.4</maven.build.helper.plugin.version>
+        <slf4j.version>1.7.1</slf4j.version>
+        <cas.version>3.5.2</cas.version>
+        <apache.commons.pool.version>1.6</apache.commons.pool.version>
+        <spring.version>3.1.1.RELEASE</spring.version>
+        <spring.security.version>3.1.0.RELEASE</spring.security.version>
+        <spring.security.cas.version>3.1.0.RELEASE</spring.security.cas.version>
+        <mysql.version>5.1.18</mysql.version>
+        <hibernate.entitymanager.version>4.1.0.Final</hibernate.entitymanager.version>
+        <c3p0.version>0.9.0.4</c3p0.version>
+        <cxf.version>2.2.11</cxf.version>
+        <servlet.api.version>2.5</servlet.api.version>
+        <standard.taglibs.version>1.1.2</standard.taglibs.version>
+        <jstl.version>1.1.2</jstl.version>
+        <opensaml.version>1.1b</opensaml.version>
+        <xmlsec.version>1.4.2</xmlsec.version>
+        <hibernate.version>4.1.0.Final</hibernate.version>
+        <oracle.ojdbc.version>11g-1.6</oracle.ojdbc.version>
+        <mysql.jdbc.version>5.1.6</mysql.jdbc.version>
+        <perf4j.version>0.9.14</perf4j.version>
+        <commons.dbcp.version>1.4</commons.dbcp.version>
+        <compileSource>1.7</compileSource>
+        <checkstyles.version>2.9.1</checkstyles.version>
+        <findbugs.plugin.version>2.3.3</findbugs.plugin.version>
+        <validation.api.version>1.0.0.GA</validation.api.version>
+        <cglib.version>2.2</cglib.version>
+        <asm.version>3.1</asm.version>
+        <snapshot.version>trunk-SNAPSHOT</snapshot.version>
+        <maven.repository.location>http://int-archiva1.clarity.com:8081/archiva/repository</maven.repository.location>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!--
+    <repositories>
+         <repository>
+             <id>snapshots.int.archiva1.clarity.com</id>
+             <url>${maven.repository.location}/snapshot/</url>
+         </repository>
+    </repositories>
+    -->
+    <developers>
+        <developer>
+            <name>Nicholas Zhu</name>
+            <email>nichols.zu@gmail.com</email>
+            <organization>Iglooit</organization>
+            <roles>
+                <role>
+                    Developer
+                </role>
+            </roles>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>iglooit-um</module>
+        <module>iglooit-um-web</module>
+        <module>iglooit-cas-server</module>
+        <module>simple-client</module>
+    </modules>
+
+    <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/generated/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${findbugs.plugin.version}</version>
+                    <configuration>
+                        <skip>false</skip>
+                        <threshold>Medium</threshold>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <skip>false</skip>
+                    <threshold>Medium</threshold>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+
+                <configuration>
+                    <target>1.6</target>
+                    <source>1.6</source>
+                    <excludes>
+                        <exclude>**/jre/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${maven.build.helper.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-generated-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>
+                                    ${basedir}/src/main/generated/java/
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <outputDirectory>${project.build.directory}/build-tools/</outputDirectory>
+                            <groupId>com.iglooit</groupId>
+                            <artifactId>iglooit-webapp-build-conf</artifactId>
+                            <version>${snapshot.version}</version>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>unpack-iglooit-build-tools</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <outputDirectory>${project.build.directory}/build-tools/</outputDirectory>
+                                    <groupId>com.iglooit</groupId>
+                                    <artifactId>iglooit-webapp-build-conf</artifactId>
+                                    <version>${snapshot.version}</version>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyles.version}</version>
+                <dependencies>
+                    <dependency>
+                        <!-- strangely - required once moved from the reporting plugins section??-->
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils-core</artifactId>
+                        <version>1.8.3</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.google.collections</groupId>
+                        <artifactId>google-collections</artifactId>
+                        <version>1.0</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.iglooit</groupId>
+                        <artifactId>checkstyle-checks</artifactId>
+                        <version>${snapshot.version}</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.iglooit</groupId>
+                        <artifactId>iglooit-bss-build-tools</artifactId>
+                        <version>${snapshot.version}</version>
+                        <scope>compile</scope>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>${project.build.directory}/build-tools/checkstyle/clarity_checks.xml</configLocation>
+                    <suppressionsLocation>${project.build.directory}/build-tools/checkstyle/suppressions.xml</suppressionsLocation>
+                    <includes>**/*.java</includes>
+                    <propertyExpansion>cacheFile=${project.build.directory}/checkstyle-cachefile</propertyExpansion>
+                    <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+                    <skipExec>false</skipExec>
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.plugin.version}</version>
+                <configuration>
+                    <excludeFilterFile>${project.build.directory}/build-tools/findbugs/findbugs.exclude.xml
+                    </excludeFilterFile>
+                    <includeFilterFile>${project.build.directory}/build-tools/findbugs/findbugs.include.xml
+                    </includeFilterFile>
+                    <threshold>Medium</threshold>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
+

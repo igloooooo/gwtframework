@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.commons.iface.type.Tuple2;
+import com.iglooit.commons.iface.type.Tuple2;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.iglooit.core.base.iface.command.request;
 
-import com.clarity.core.base.iface.command.ReadWriteRequest;
-import com.clarity.core.base.iface.command.Request;
-import com.clarity.core.base.iface.command.response.Tuple2Response;
-import com.clarity.core.oss.iface.AttachmentCodes;
+import com.iglooit.core.base.iface.command.ReadWriteRequest;
+import com.iglooit.core.base.iface.command.Request;
+import com.iglooit.core.base.iface.command.response.Tuple2Response;
+import com.iglooit.core.oss.iface.AttachmentCodes;
 
 import javax.servlet.http.HttpServletRequest;
 

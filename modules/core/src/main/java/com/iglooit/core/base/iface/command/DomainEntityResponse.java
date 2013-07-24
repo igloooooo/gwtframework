@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.core.base.iface.domain.DomainEntity;
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.AppX;
+import com.iglooit.core.base.iface.domain.DomainEntity;
 
 public class DomainEntityResponse<DE extends DomainEntity> extends Response
 {

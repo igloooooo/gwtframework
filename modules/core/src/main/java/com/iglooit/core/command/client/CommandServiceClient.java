@@ -1,7 +1,7 @@
 package com.iglooit.core.command.client;
 
-import com.clarity.core.base.iface.command.Request;
-import com.clarity.core.base.iface.command.Response;
+import com.iglooit.core.base.iface.command.Request;
+import com.iglooit.core.base.iface.command.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.util.List;

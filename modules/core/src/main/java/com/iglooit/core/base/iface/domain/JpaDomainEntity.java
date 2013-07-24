@@ -1,9 +1,10 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.iglooit.commons.iface.type.UUID;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
@@ -12,9 +13,8 @@ import javax.persistence.Version;
 public abstract class JpaDomainEntity<InheritingClass extends JpaDomainEntity> extends DomainEntity
 {
     @Id
-    @Type(type = "com.clarity.core.lib.server.hibernate.UUIDUserType")
-    @Column(columnDefinition = "raw(16)")
-    private UUID<InheritingClass> id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
     @Version
     @Column(nullable = false)
@@ -24,14 +24,10 @@ public abstract class JpaDomainEntity<InheritingClass extends JpaDomainEntity> e
 
     public JpaDomainEntity()
     {
-        //UUID factory should be populated by the entry point for all modules.
-        //ID should not be null, however it may be in scenario's such as test cases,
-        //and using the IntelliJ Persistence framework,
-        //in these cases, we do not want to throw an appX but it is acceptable to return a null ID.
-        this.id = uuidFactory == null ? null : uuidFactory.<InheritingClass>generate();
+        this.id = null;
     }
 
-    protected JpaDomainEntity(UUID<InheritingClass> id)
+    protected JpaDomainEntity(Long id)
     {
         this.id = id;
     }
@@ -39,7 +35,7 @@ public abstract class JpaDomainEntity<InheritingClass extends JpaDomainEntity> e
     @Override
     public int hashCode()
     {
-        return getId() == null ? 1 : getId().hashCode();
+        return getId() == null ? 1 : getId().intValue();
     }
 
     @Override
@@ -58,12 +54,12 @@ public abstract class JpaDomainEntity<InheritingClass extends JpaDomainEntity> e
         return getId().equals(other.getId());
     }
 
-    public UUID<InheritingClass> getId()
+    public Long getId()
     {
         return id;
     }
 
-    public void setId(UUID id)
+    public void setId(Long id)
     {
         this.id = id;
     }

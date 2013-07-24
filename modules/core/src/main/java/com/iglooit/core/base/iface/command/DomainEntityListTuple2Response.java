@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command;
 
-import com.clarity.core.base.iface.domain.DomainEntity;
-import com.clarity.commons.iface.type.Tuple2;
+import com.iglooit.commons.iface.type.Tuple2;
+import com.iglooit.core.base.iface.domain.DomainEntity;
 
 import java.util.List;
 

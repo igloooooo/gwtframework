@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.command.response;
 
-import com.clarity.core.base.iface.command.Response;
+import com.iglooit.core.base.iface.command.Response;
 
 // concrete class for void responses
 public class VoidResponse extends Response

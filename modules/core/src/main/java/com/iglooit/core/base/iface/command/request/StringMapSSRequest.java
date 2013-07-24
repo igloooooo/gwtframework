@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.command.request;
 
-import com.clarity.core.base.iface.command.Request;
-import com.clarity.core.base.iface.command.Response;
+import com.iglooit.core.base.iface.command.Request;
+import com.iglooit.core.base.iface.command.Response;
 
 import java.util.Map;
 

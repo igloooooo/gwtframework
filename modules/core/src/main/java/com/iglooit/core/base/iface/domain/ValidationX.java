@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.domain.ValidationResult;
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.domain.ValidationResult;
+import com.iglooit.commons.iface.type.AppX;
 
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.domain.ValidationResult;
+import com.iglooit.commons.iface.domain.ValidationResult;
 
 import java.util.List;
 

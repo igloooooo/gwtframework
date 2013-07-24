@@ -21,14 +21,14 @@ public class NavigationBarItem implements Serializable
         OSS("OSS"),
 
         /**
-         * Column preference for 'Infrastructure Management' category
+         * Column preference for 'Infrastructure Manager' category
          */
-        IM("IM"),
+        IM("Infrastructure Manager"),
 
         /**
          * Column preference for 'Market Place' category
          */
-        MP("MP");
+        MP("Marketplace");
 
         private String defaultTitle;
 

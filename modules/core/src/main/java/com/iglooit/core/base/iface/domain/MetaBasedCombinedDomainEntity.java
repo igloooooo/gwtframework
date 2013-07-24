@@ -1,11 +1,11 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.domain.ValidationResult;
-import com.clarity.commons.iface.domain.Validator;
-import com.clarity.commons.iface.domain.meta.Meta;
-import com.clarity.commons.iface.type.AppX;
-import com.clarity.commons.iface.type.NoMetaPropertyNameX;
-import com.clarity.commons.iface.type.Option;
+import com.iglooit.commons.iface.domain.ValidationResult;
+import com.iglooit.commons.iface.domain.Validator;
+import com.iglooit.commons.iface.domain.meta.Meta;
+import com.iglooit.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.NoMetaPropertyNameX;
+import com.iglooit.commons.iface.type.Option;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.io.Serializable;

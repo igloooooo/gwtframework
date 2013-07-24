@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.util.StringUtil;
-import com.clarity.commons.iface.type.UUID;
+import com.iglooit.commons.iface.type.UUID;
+import com.iglooit.commons.iface.util.StringUtil;
 
 import javax.persistence.MappedSuperclass;
 
@@ -22,7 +22,7 @@ public abstract class NamedJpaDomainEntity<InheritingClass extends JpaDomainEnti
         this.description = description;
     }
 
-    protected NamedJpaDomainEntity(UUID id, String name, String description)
+    protected NamedJpaDomainEntity(Long id, String name, String description)
     {
         super(id);
         this.name = name;

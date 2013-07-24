@@ -1,0 +1,19 @@
+#header, #content, #footer, .clearfix, #student .row, #student .col {zoom:1;} /* needs to be seen by IE7 to trigger hasLayout */
+
+/* FOOTER --------------------------------- */
+#footer {padding-bottom:1em;}
+
+.corners-mask {
+	overflow:hidden;
+	width:442px; /* = .box width + padding + border width */
+	box-shadow: 0 4px 5px #b2becc, inset 0 0 3px rgba(255, 255, 255, 0.7);
+}
+
+
+/* lt IE6 */
+* html #cas #login .btn-submit {background:#ffd;}
+* html #cas #login .btn-row {top:5px;}
+* html #sidebar {display:inline;} /* double margin on float bug */
+* html input.btn-submit {padding:2px .25em; width:0; overflow:visible;} /* extra width fix */ 
+
+

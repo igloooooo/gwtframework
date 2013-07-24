@@ -1,7 +1,7 @@
 package com.iglooit.core.base.iface.domain;
 
-import com.clarity.commons.iface.annotation.NoMetaAccess;
-import com.clarity.commons.iface.domain.meta.Meta;
+import com.iglooit.commons.iface.annotation.NoMetaAccess;
+import com.iglooit.commons.iface.domain.meta.Meta;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 import java.io.Serializable;

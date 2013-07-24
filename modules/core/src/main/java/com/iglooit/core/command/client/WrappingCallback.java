@@ -1,6 +1,6 @@
 package com.iglooit.core.command.client;
 
-import com.clarity.commons.iface.type.AppX;
+import com.iglooit.commons.iface.type.AppX;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class WrappingCallback<ResponseType> implements AsyncCallback<ResponseType>
